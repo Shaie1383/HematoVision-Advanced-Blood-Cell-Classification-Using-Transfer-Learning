@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hemato Vision - Analysis Results</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .result-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .result-box {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #eaf2f8;
+            border-radius: 8px;
+            width: 80%;
+            text-align: center;
+        }
+        .cell-type {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        .confidence {
+            font-size: 18px;
+            color: #27ae60;
+            margin-bottom: 20px;
+        }
+        .image-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image-container img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .back-button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #2980b9;
+        }
+        .info-box {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .cell-info {
+            margin-top: 15px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hemato Vision Results</h1>
+        
+        <div class="result-container">
+            <div class="image-container">
+                <h3>Analyzed Image</h3>
+                <img src="{{ url_for('static', filename=result.image_path) }}" alt="Blood Cell Image">
+            </div>
+            
+            <div class="result-box">
+                <h3>Classification Result</h3>
+                <div class="cell-type">{{ result.class_name }}</div>
+                <div class="confidence">Confidence: {{ result.confidence }}</div>
+            </div>
+            
+            <div class="info-box">
+                <h3>About {{ result.class_name }}</h3>
+                <div class="cell-info">
+                    {% if result.class_name == 'Eosinophil' %}
+                        <p>Eosinophils are white blood cells that fight infections and are involved in allergic reactions. They typically make up 1-6% of white blood cells.</p>
+                        <p>Elevated levels may indicate allergic disorders, parasitic infections, or certain autoimmune conditions.</p>
+                    {% elif result.class_name == 'Lymphocyte' %}
+                        <p>Lymphocytes are white blood cells that are crucial for immune response. They include T cells, B cells, and natural killer cells.</p>
+                        <p>They typically make up 20-40% of white blood cells and are essential for fighting viral infections and producing antibodies.</p>
+                    {% elif result.class_name == 'Monocyte' %}
+                        <p>Monocytes are the largest type of white blood cells and play a key role in the immune system's response to infection.</p>
+                        <p>They typically make up 2-8% of white blood cells and can transform into macrophages when they enter tissues.</p>
+                    {% elif result.class_name == 'Neutrophil' %}
+                        <p>Neutrophils are the most abundant type of white blood cells, making up 55-70% of them. They are the first responders to infection.</p>
+                        <p>They are crucial for fighting bacterial infections and are characterized by their multi-lobed nucleus.</p>
+                    {% else %}
+                        <p>Detailed information about this cell type is not available.</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <a href="{{ url_for('home') }}" class="back-button">Analyze Another Image</a>
+        </div>
+    </div>
+</body>
+</html>

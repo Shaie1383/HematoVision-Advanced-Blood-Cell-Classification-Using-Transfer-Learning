@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hemato Vision - Blood Cell Classifier</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .upload-form {
+            margin: 30px 0;
+            text-align: center;
+        }
+        .upload-form input[type="file"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 80%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .upload-form input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .upload-form input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        .error {
+            color: #e74c3c;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #fadbd8;
+            border-radius: 5px;
+        }
+        .info {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #eaf2f8;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hemato Vision</h1>
+        <h2 style="text-align: center; color: #7f8c8d;">Blood Cell Classification System</h2>
+        
+        <div class="upload-form">
+            <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+                <input type="file" name="image" accept=".png, .jpg, .jpeg"><br>
+                <input type="submit" value="Analyze Blood Cell Image">
+            </form>
+        </div>
+        
+        {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+        {% endif %}
+        
+        <div class="info">
+            <h3>About Hemato Vision</h3>
+            <p>Hemato Vision is an advanced blood cell classification system that uses deep learning to identify different types of blood cells from microscopic images.</p>
+            <p>Upload a clear image of a blood cell to get instant classification results.</p>
+            <p><strong>Supported cell types:</strong> Eosinophil, Lymphocyte, Monocyte, Neutrophil</p>
+        </div>
+    </div>
+</body>
+</html>
