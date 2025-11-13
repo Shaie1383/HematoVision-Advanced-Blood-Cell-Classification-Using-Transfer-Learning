@@ -97,4 +97,4 @@ Kaggle Blood Cell Dataset
 
 OpenAI GPT & ChatGPT for assistance in planning and documentation
 
-👩‍💻 Created by Team LTVIP2025TMID47286 — Shaik Sheema Firdose (Team Lead), Shaista Mulla, Srinivas, Baibare Mohammed Affan
+👩‍💻 Created by Team LTVIP2025TMID47286 — Shaista Mulla
